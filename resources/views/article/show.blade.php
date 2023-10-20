@@ -6,13 +6,13 @@
                 
             </div>
             <div class="col-6">
-                <h1 class="display-2 text-center">{{$design->title}}</h1>
-                <h3>{{$design->category}}</h3>
-                <p>{{$design->descritpion}}</p>
-                <p>{{$design->price}}</p>
+                <h1 class="display-2 text-center ">{{$product->title}}</h1>
+                <h3>{{$product->category}}</h3>
+                <p>{{$product->descritpion}}</p>
+                <p>{{$product->price}}</p>
             </div>
             <div class="col-6">
-                <img src="{{Storage::url($design->img)}}" height="300px" alt="">
+                <img src="{{Storage::url($product->img)}}" height="300px" alt="">
             </div>
         </div>
     </div>

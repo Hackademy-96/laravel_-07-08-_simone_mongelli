@@ -23,4 +23,4 @@ Route::get('/article/create',[DesignController::class,"create"])->name('article_
 Route::post('/article/store',[DesignController::class,"store"])->name('article_store');
 Route::get('/article/index',[DesignController::class,"index"])->name('article_index');
 
-Route::get('/article/show/{design}',[DesignController::class,"show"])->name('article_show');
+Route::get('/article/show/{product}',[DesignController::class,"show"])->name('article_show');

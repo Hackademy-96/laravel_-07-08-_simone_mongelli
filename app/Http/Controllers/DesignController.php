@@ -46,10 +46,10 @@ class DesignController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Design $design)
+    public function show(Design $product)
     {
         
-        return view('article.show', compact('design'));
+        return view('article.show', compact('product'));
     }
 
     /**
