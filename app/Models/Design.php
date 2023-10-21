@@ -10,10 +10,11 @@ class Design extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'category',
-        'descritpion',
-        'img',
-        'price',
+        'title','category','descritpion','img','price','user_id',
     ];
+
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
 }

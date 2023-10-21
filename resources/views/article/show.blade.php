@@ -10,6 +10,19 @@
                 <h3>{{$product->category}}</h3>
                 <p>{{$product->descritpion}}</p>
                 <p>{{$product->price}}</p>
+                {{-- <p>{{$product->user->name}}</p> --}}
+                
+                {{-- @if($product->user->id == Auth::user()->id) --}}
+                <a href="{{route('article_edit', compact('product'))}}" class="btn btn-outline-dark">Modifica articolo </a>
+                <form method="POST" action="{{route('article_destroy', compact('product'))}}">
+                    @method('delete')
+                    @csrf
+
+                    <button type="submit" class="btn btn-outline-danger">Elimina articolo </button>
+
+                </form>
+                {{-- @endif --}}
+               
             </div>
             <div class="col-6">
                 <img src="{{Storage::url($product->img)}}" height="300px" alt="">

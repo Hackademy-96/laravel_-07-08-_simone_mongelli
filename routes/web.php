@@ -24,3 +24,10 @@ Route::post('/article/store',[DesignController::class,"store"])->name('article_s
 Route::get('/article/index',[DesignController::class,"index"])->name('article_index');
 
 Route::get('/article/show/{product}',[DesignController::class,"show"])->name('article_show');
+
+Route::get('/article/edit/{product}',[DesignController::class,'edit'])->name('article_edit');
+Route::post('/article/update/{product}',[DesignController::class,'update'])->name('article_update');
+
+Route::delete('/article/destroy/{product}',[DesignController::class,'destroy'])->name('article_destroy');
+
+Route::get('/profile',[PublicController::class, "profile"])->name('profile_page');

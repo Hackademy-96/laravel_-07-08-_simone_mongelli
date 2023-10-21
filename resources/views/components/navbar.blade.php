@@ -28,6 +28,9 @@
                     </form>
                     
                 </li>
+                <li class=" dropdown-item nav-item  d-flex justify-content-center">
+                  <a class="nav-link active" href="{{route('profile_page')}}">Profilo </a>
+                </li>
             </ul>
         </li>
         @endauth

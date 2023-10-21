@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Design;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DesignController extends Controller
 {
+
+
+    // public function __construct(){
+    //     $this->middleware('auth')->except('index','show');
+    //     //!nome funzione dentro except
+    // }
+    
     /**
      * Display a listing of the resource.
      */
@@ -36,7 +44,8 @@ class DesignController extends Controller
             'category' => $request->category,
             'descritpion' => $request->description,
             'price' => $request->price,
-            'img'=> $request->file('img')->store('public/design'),
+            'img' => $request->file('img')->store('public/design'),
+            // 'user_id' => Auth::user()->id,
 
         ]);
         
@@ -55,24 +64,38 @@ class DesignController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Design $design)
+    public function edit(Design $product)
     {
-        //
+       return view('article.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Design $design)
+    public function update(Request $request, Design $product)
     {
-        //
+        $product->update([
+            $product->title = $request->title,
+            $product->category = $request->category,
+            $product->descritpion = $request->description,
+            $product->price = $request->price,
+            $product->img = $request->file('img')->store('public/design'),
+        ]);
+
+        if($request->img)
+        $product->img = $request->file('img')->store('public/design');
+        $product->save();
+
+      
+        return redirect(route('welcome'))->with('message','Articolo modificato correttamente! ');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Design $design)
+    public function destroy(Design $product)
     {
-        //
+     $product->delete();
+     return redirect(route('welcome'))->with('message','Articolo cancellato correttamente! ');
     }
 }
