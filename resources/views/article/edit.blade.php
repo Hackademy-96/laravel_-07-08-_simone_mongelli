@@ -32,6 +32,19 @@
                         <label for="img" class="form-label">Carica la copertina </label>
                         <input name="img" type="file" class="form-control" id="img">
                       </div>
+
+                      
+                  <div class="mb-3">
+                    @foreach ($consoles as $console)
+                  <div class="form-check">
+                    <input class="form-check-input" @if($product->consoles->contains($console)) checked @endif 
+                    name="consoles[]" type="checkbox" value="{{$console->id}}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{$console->name}}
+                    </label>
+                  </div>
+                  @endforeach
+                  </div>
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

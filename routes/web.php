@@ -31,3 +31,5 @@ Route::post('/article/update/{product}',[DesignController::class,'update'])->nam
 Route::delete('/article/destroy/{product}',[DesignController::class,'destroy'])->name('article_destroy');
 
 Route::get('/profile',[PublicController::class, "profile"])->name('profile_page');
+
+Route::get('/console/filter/{console}',[PublicController::class, "console_filter"])->name('console_filter');

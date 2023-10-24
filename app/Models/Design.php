@@ -17,4 +17,8 @@ class Design extends Model
 
         return $this->belongsTo(User::class);
     }
+
+    public function consoles(){
+        return $this->belongsToMany(Console::class);
+    }
 }

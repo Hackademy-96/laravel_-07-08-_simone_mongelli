@@ -10,9 +10,23 @@
                 <h3>{{$product->category}}</h3>
                 <p>{{$product->descritpion}}</p>
                 <p>{{$product->price}}</p>
-                {{-- <p>{{$product->user->name}}</p> --}}
+                <p>{{$product->user->name}}</p>
+                <p>{{$product->user->email}}</p>
+                <h4>Questo articolo è disponibile su:</h4>
+
+                <ol>
+
+                @foreach($product->consoles as $console )
+
+                <li>
+                    {{$console->name}}
+                </li>
+
+                @endforeach
                 
-                {{-- @if($product->user->id == Auth::user()->id) --}}
+                </ol>
+                
+                @if($product->user->id == Auth::user()->id)
                 <a href="{{route('article_edit', compact('product'))}}" class="btn btn-outline-dark">Modifica articolo </a>
                 <form method="POST" action="{{route('article_destroy', compact('product'))}}">
                     @method('delete')
@@ -21,7 +35,7 @@
                     <button type="submit" class="btn btn-outline-danger">Elimina articolo </button>
 
                 </form>
-                {{-- @endif --}}
+                @endif
                
             </div>
             <div class="col-6">

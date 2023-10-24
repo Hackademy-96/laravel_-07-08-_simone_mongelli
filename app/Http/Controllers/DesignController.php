@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Design;
+use App\Models\Console;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,8 +30,11 @@ class DesignController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
+
     {
-        return view('article.create');
+        $consoles = Console::all();
+
+        return view('article.create', compact('consoles'));
     }
 
     /**
@@ -38,6 +42,8 @@ class DesignController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         
         $product = Design::create([
             'title' => $request->title,
@@ -45,11 +51,13 @@ class DesignController extends Controller
             'descritpion' => $request->description,
             'price' => $request->price,
             'img' => $request->file('img')->store('public/design'),
-            // 'user_id' => Auth::user()->id,
+            'user_id' => Auth::user()->id,
 
         ]);
+
+        $product->consoles()->attach($request->consoles);
         
-        return redirect(route('welcome'))->with('message','Grzie per aver caricato il tuo articolo ');
+        return redirect(route('welcome'))->with('message','Grazie per aver caricato il tuo articolo ');
     }
 
     /**
@@ -65,8 +73,11 @@ class DesignController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Design $product)
+
     {
-       return view('article.edit', compact('product'));
+        $consoles = Console::all();
+
+       return view('article.edit', compact('product','consoles'));
     }
 
     /**
@@ -79,12 +90,15 @@ class DesignController extends Controller
             $product->category = $request->category,
             $product->descritpion = $request->description,
             $product->price = $request->price,
-            $product->img = $request->file('img')->store('public/design'),
+           
         ]);
 
-        if($request->img)
+        if($request->img){
         $product->img = $request->file('img')->store('public/design');
         $product->save();
+        }
+
+        $product->consoles()->sync($request->consoles);
 
       
         return redirect(route('welcome'))->with('message','Articolo modificato correttamente! ');
@@ -95,6 +109,9 @@ class DesignController extends Controller
      */
     public function destroy(Design $product)
     {
+    
+     $product->consoles()->detach();
+
      $product->delete();
      return redirect(route('welcome'))->with('message','Articolo cancellato correttamente! ');
     }

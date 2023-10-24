@@ -25,12 +25,26 @@
                     <label for="price" class="form-label">Prezzo</label>
                     <input name="price" type="text" class="form-control" id="price">
                   </div>
+
                   <div class="mb-3">
                     <label for="img" class="form-label">Carica la copertina </label>
                     <input name="img" type="file" class="form-control" id="img">
                   </div>
+
+                  <div class="mb-3">
+                    @foreach ($consoles as $console)
+                  <div class="form-check">
+                    <input class="form-check-input" name="consoles[]" type="checkbox" value="{{$console->id}}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {{$console->name}}
+                    </label>
+                  </div>
+                  @endforeach
+                  </div>
+                 
+                      
                 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-outline-dark">Submit</button>
               </form>
         </div>
     </div>
